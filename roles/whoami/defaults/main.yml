@@ -1,13 +1,12 @@
 ---
 # Container configuration
 whoami_image: "docker.io/traefik/whoami:latest"
-whoami_container_name: "whoami"
-whoami_port: 8080
+whoami_container_name: "{{ whoami_app_name }}.{{ app_internal_domain }}"
 whoami_restart_policy: "unless-stopped"
 whoami_log_max_size: "5m"
 
 # App configuration (passed to app role)
-whoami_app_name: "whoami"
+whoami_app_name: "whoami.{{ domain_name }}"
 whoami_with_traefik: false
 whoami_traefik_hostname: "{{ whoami_app_name }}"
 

@@ -29,6 +29,9 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
   - Support for multiple instances with different configurations
 
 ### Changed
+- Whoami role container naming convention updated
+  - Container name now uses full `app_name` with `app_internal_domain` suffix
+  - Removed exposed port mapping as container uses internal proxy network
 - All roles now use a global "proxy" network for inter-container communication
   - Traefik role: Changed default network from "host" to "proxy"
   - App role: Added `app_network` configuration defaulting to "proxy"

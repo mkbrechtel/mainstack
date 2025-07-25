@@ -7,8 +7,6 @@
     restart_policy: "{{ whoami_restart_policy }}"
     network: "{{ whoami_network }}"
     hostname: "{{ whoami_app_name }}.{{ app_internal_domain }}"
-    ports:
-      - "{{ whoami_port }}:80"
     log_opt:
       max_size: "{{ whoami_log_max_size }}"
   notify: restart whoami
