@@ -7,6 +7,8 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+## [0.0.2] - 2025-07-25
+
 ### Added
 - Podman role for installing container runtime with DNS support
   - Installs podman, dnsmasq, containernetworking-plugins, and podman-compose
@@ -48,6 +50,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 ### Documentation
 - Added "_with_" feature flag pattern documentation to CLAUDE.md
 - Documented the convention for optional functionality in roles
+- Added comprehensive proxy network architecture documentation to CODING.md
 
 ## [0.0.1] - 2025-07-25
 
@@ -75,5 +78,6 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - containers.podman: >=1.10.0
 - ansible.posix: >=1.5.0
 
+[0.0.2]: https://github.com/mkbrechtel/mainstack/compare/v0.0.1...v0.0.2
 [0.0.1]: https://github.com/mkbrechtel/mainstack/compare/v0.0.0-dev...v0.0.1
 [0.0.0-dev]: https://github.com/mkbrechtel/mainstack/releases/tag/v0.0.0-dev
