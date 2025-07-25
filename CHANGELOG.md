@@ -7,6 +7,8 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+## [0.0.1] - 2025-07-25
+
 ### Added
 - Traefik role for deploying Traefik v3.5 reverse proxy with Podman
   - Configurable network mode (defaults to host networking)
@@ -31,4 +33,5 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - containers.podman: >=1.10.0
 - ansible.posix: >=1.5.0
 
+[0.0.1]: https://github.com/mkbrechtel/mainstack/compare/v0.0.0-dev...v0.0.1
 [0.0.0-dev]: https://github.com/mkbrechtel/mainstack/releases/tag/v0.0.0-dev
