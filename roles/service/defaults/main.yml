@@ -1,0 +1,27 @@
+---
+# Service name (required)
+service_name: ""
+
+# Service directory
+service_dir: "/srv/{{ service_name }}"
+
+# Feature flags
+service_with_traefik_proxy: false
+
+# Traefik configuration
+# This default configuration provides a basic HTTP service setup
+# Override this variable to customize the Traefik configuration for your service
+service_traefik_config: |
+  http:
+    routers:
+      {{ service_name }}:
+        entrypoints: websecure
+        rule: Host(`{{ service_name }}.{{ domain_name }}`)
+        service: {{ service_name }}
+        tls:
+          certresolver: letsencrypt
+    services:
+      {{ service_name }}:
+        loadBalancer:
+          servers:
+            - url: http://{{ service_name }}:80

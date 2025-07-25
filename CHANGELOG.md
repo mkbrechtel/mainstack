@@ -7,6 +7,17 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+### Added
+- Service role for managing service directories and Traefik integration
+  - Configurable service directory (defaults to `/srv/{{ service_name }}`)
+  - Optional Traefik proxy integration with `service_with_traefik_proxy` feature flag
+  - Customizable Traefik configuration through `service_traefik_config` variable
+  - Automatic Traefik configuration file generation at `/etc/traefik/conf.d/{{ service_name }}.yaml`
+
+### Documentation
+- Added "_with_" feature flag pattern documentation to CLAUDE.md
+- Documented the convention for optional functionality in roles
+
 ## [0.0.1] - 2025-07-25
 
 ### Added

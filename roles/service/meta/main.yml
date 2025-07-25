@@ -1,0 +1,25 @@
+---
+galaxy_info:
+  author: mainstack
+  description: Configure service directories and optional Traefik integration
+  license: MIT
+  min_ansible_version: "2.9"
+  platforms:
+    - name: EL
+      versions:
+        - "8"
+        - "9"
+    - name: Debian
+      versions:
+        - bullseye
+        - bookworm
+    - name: Ubuntu
+      versions:
+        - focal
+        - jammy
+  galaxy_tags:
+    - service
+    - traefik
+    - configuration
+
+dependencies: []

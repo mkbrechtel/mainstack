@@ -1,0 +1,28 @@
+---
+- name: Validate service_name is defined
+  ansible.builtin.assert:
+    that:
+      - service_name is defined
+      - service_name | length > 0
+    fail_msg: "service_name must be defined and not empty"
+
+- name: Create service directory
+  ansible.builtin.file:
+    path: "{{ service_dir }}"
+    state: directory
+    mode: '0755'
+
+- name: Configure Traefik for service
+  when: service_with_traefik_proxy | bool
+  block:
+    - name: Ensure Traefik conf.d directory exists
+      ansible.builtin.file:
+        path: /etc/traefik/conf.d
+        state: directory
+        mode: '0755'
+
+    - name: Deploy Traefik configuration for service
+      ansible.builtin.template:
+        src: traefik-service.yaml.j2
+        dest: "/etc/traefik/conf.d/{{ service_name }}.yaml"
+        mode: '0644'
