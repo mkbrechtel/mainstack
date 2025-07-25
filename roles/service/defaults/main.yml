@@ -11,6 +11,9 @@ service_with_traefik_proxy: false
 # Traefik hostname (used in Traefik rule)
 service_traefik_hostname: "{{ service_name }}"
 
+# Traefik service URL (backend URL for the service)
+service_traefik_url: "http://{{ service_name }}:80"
+
 # Traefik configuration
 # This default configuration provides a basic HTTP service setup
 # Override this variable to customize the Traefik configuration for your service
@@ -27,4 +30,4 @@ service_traefik_config: |
       {{ service_name }}:
         loadBalancer:
           servers:
-            - url: http://{{ service_name }}:80
+            - url: {{ service_traefik_url }}

@@ -1,0 +1,34 @@
+---
+galaxy_info:
+  author: mainstack
+  description: Deploy traefik/whoami service for testing HTTP routing
+  license: MIT
+  min_ansible_version: "2.9"
+  platforms:
+    - name: EL
+      versions:
+        - "8"
+        - "9"
+    - name: Debian
+      versions:
+        - bullseye
+        - bookworm
+    - name: Ubuntu
+      versions:
+        - focal
+        - jammy
+  galaxy_tags:
+    - whoami
+    - traefik
+    - testing
+    - http
+    - podman
+    - containers
+
+dependencies:
+  - role: service
+    vars:
+      service_name: "{{ whoami_service_name }}"
+      service_with_traefik_proxy: "{{ whoami_with_traefik }}"
+      service_traefik_hostname: "{{ whoami_traefik_hostname }}"
+      service_traefik_url: "http://localhost:{{ whoami_port }}"

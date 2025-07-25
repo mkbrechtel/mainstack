@@ -21,6 +21,9 @@ service_with_traefik_proxy: false  # Enable Traefik integration
 # Traefik hostname (used in Traefik rule)
 service_traefik_hostname: "{{ service_name }}"  # Hostname for Traefik routing
 
+# Traefik service URL (backend URL for the service)
+service_traefik_url: "http://{{ service_name }}:80"  # Backend service URL
+
 # Traefik configuration (when service_with_traefik_proxy is true)
 service_traefik_config: |
   http:
@@ -35,7 +38,7 @@ service_traefik_config: |
       {{ service_name }}:
         loadBalancer:
           servers:
-            - url: http://{{ service_name }}:80
+            - url: {{ service_traefik_url }}
 ```
 
 ## Dependencies

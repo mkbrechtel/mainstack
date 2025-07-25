@@ -1,0 +1,19 @@
+---
+- name: Create podman network
+  containers.podman.podman_network:
+    name: "{{ whoami_network }}"
+    state: present
+  when: whoami_network != "host"
+
+- name: Deploy whoami container
+  containers.podman.podman_container:
+    name: "{{ whoami_container_name }}"
+    image: "{{ whoami_image }}"
+    state: started
+    restart_policy: "{{ whoami_restart_policy }}"
+    network: "{{ whoami_network }}"
+    ports:
+      - "{{ whoami_port }}:80"
+    log_opt:
+      max_size: "{{ whoami_log_max_size }}"
+  notify: restart whoami

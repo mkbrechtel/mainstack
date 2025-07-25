@@ -12,8 +12,14 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
   - Configurable service directory (defaults to `/srv/{{ service_name }}`)
   - Optional Traefik proxy integration with `service_with_traefik_proxy` feature flag
   - Separate `service_traefik_hostname` variable for Traefik routing (defaults to `service_name`)
+  - Explicit `service_traefik_url` variable for backend service URL configuration
   - Customizable Traefik configuration through `service_traefik_config` variable
   - Automatic Traefik configuration file generation at `/etc/traefik/conf.d/{{ service_name }}.yaml`
+- Whoami role as example implementation using the service role
+  - Deploys traefik/whoami container for testing HTTP routing
+  - Demonstrates service role usage with Traefik integration
+  - Configurable port mapping and container settings
+  - Support for multiple instances with different configurations
 
 ### Documentation
 - Added "_with_" feature flag pattern documentation to CLAUDE.md

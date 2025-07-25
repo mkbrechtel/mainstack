@@ -1,0 +1,6 @@
+---
+- name: restart whoami
+  containers.podman.podman_container:
+    name: "{{ whoami_container_name }}"
+    state: started
+    restart: true

@@ -15,3 +15,8 @@
       vars:
         traefik_dashboard_route_enabled: true
         traefik_log_level: "INFO"
+    
+    - role: whoami
+      vars:
+        whoami_with_traefik: true
+        whoami_traefik_hostname: "whoami.{{ domain_name }}"
