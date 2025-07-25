@@ -8,6 +8,13 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 ## [Unreleased]
 
 ### Added
+- Podman role for installing container runtime with DNS support
+  - Installs podman, dnsmasq, containernetworking-plugins, and podman-compose
+  - Includes dnsname plugin for container DNS resolution
+  - Daemonless operation (no systemd service management)
+- System playbook (`system.yaml`) for base system setup
+  - Configures Podman installation on target hosts
+  - Uses local connection by default for localhost deployment
 - App role for managing app directories and Traefik integration
   - Configurable app directory (defaults to `/srv/apps/{{ app_name }}`)
   - Optional Traefik proxy integration with `app_with_traefik_proxy` feature flag

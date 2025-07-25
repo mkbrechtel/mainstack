@@ -1,0 +1,9 @@
+---
+- name: Install Podman on system
+  hosts: localhost
+  connection: local
+  become: yes
+  tasks:
+    - name: Install Podman
+      ansible.builtin.include_role:
+        name: podman
