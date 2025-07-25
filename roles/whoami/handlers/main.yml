@@ -1,6 +1,10 @@
 ---
 - name: restart whoami
-  containers.podman.podman_container:
-    name: "{{ whoami_container_name }}"
-    state: started
-    restart: true
+  ansible.builtin.debug:
+    msg: "Whoami container would be restarted (skipped in check mode)"
+  when: ansible_check_mode | default(false)
+
+- name: restart whoami
+  ansible.builtin.command:
+    cmd: podman restart {{ whoami_container_name }}
+  when: not (ansible_check_mode | default(false))

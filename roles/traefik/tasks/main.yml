@@ -23,14 +23,6 @@
   notify: restart traefik
   when: traefik_dashboard_route_enabled | bool
 
-- name: Deploy custom route configurations
-  ansible.builtin.copy:
-    content: "{{ item.content }}"
-    dest: "{{ traefik_config_dir }}/conf.d/{{ item.name }}.yaml"
-    mode: '0644'
-  loop: "{{ traefik_custom_routes }}"
-  notify: restart traefik
-
 - name: Create proxy network
   containers.podman.podman_network:
     name: "{{ traefik_network }}"

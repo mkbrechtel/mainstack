@@ -2,20 +2,17 @@
 - name: Deploy mainstack locally
   hosts: localhost
   connection: local
-  become: true
   vars:
     domain_name: "{{ ansible_fqdn }}"
   tasks:
     - name: Show detected domain
       ansible.builtin.debug:
         msg: "Using domain: {{ domain_name }}"
-  
   roles:
     - role: traefik
       vars:
         traefik_dashboard_route_enabled: true
         traefik_log_level: "INFO"
-    
     - role: whoami
       vars:
         whoami_with_traefik: true

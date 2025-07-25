@@ -5,6 +5,10 @@ app_name: ""
 # App directory
 app_dir: "/srv/apps/{{ app_name }}"
 
+# Network configuration
+app_network: "proxy"
+app_internal_domain: "app.internal"
+
 # Feature flags
 app_with_traefik_proxy: false
 
@@ -12,7 +16,7 @@ app_with_traefik_proxy: false
 app_traefik_hostname: "{{ app_name }}"
 
 # Traefik app URL (backend URL for the app)
-app_traefik_url: "http://{{ app_name }}:80"
+app_traefik_url: "http://{{ app_name }}.{{ app_internal_domain }}:80"
 
 # Traefik configuration
 # This default configuration provides a basic HTTP app setup

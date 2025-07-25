@@ -4,25 +4,25 @@ traefik_version: "v3.5"
 traefik_image: "docker.io/traefik:{{ traefik_version }}"
 traefik_container_name: "traefik"
 traefik_restart_policy: "unless-stopped"
-traefik_network: "host"
+traefik_network: "proxy"
 traefik_log_max_size: "5m"
 
 # Traefik configuration directory
 traefik_config_dir: "/etc/traefik"
 
+# https
+traefik_https_port: 443
+
+# http
+traefik_http_port: 80
+traefik_with_http_entrypoint: true
+traefik_with_https_redirect: true
+
 # Volume for SSL certificates
 traefik_certs_volume: "ssl-certs"
 
-# Ports
-traefik_http_port: 80
-traefik_https_port: 443
-
-# Feature flags
-traefik_with_http_entrypoint: true
-traefik_with_https_redirect: true
-traefik_with_dashboard: true
-
 # Dashboard configuration
+traefik_with_dashboard: true
 traefik_dashboard_insecure: false
 traefik_dashboard_service_name: "traefik.{{ domain_name }}"
 traefik_dashboard_route_enabled: false
@@ -41,23 +41,3 @@ traefik_cert_resolvers:
     ca_server: "https://acme-staging-v02.api.letsencrypt.org/directory"
     email: "tom-robin.raja@uk-koeln.de"
     tls_challenge: true
-
-# Custom route configurations
-traefik_custom_routes: []
-# Example:
-# traefik_custom_routes:
-#   - name: whoami
-#     content: |
-#       http:
-#         routers:
-#           whoami:
-#             entrypoints: websecure
-#             rule: Host(`whoami.example.com`)
-#             service: whoami
-#             tls:
-#               certresolver: letsencrypt
-#         services:
-#           whoami:
-#             loadBalancer:
-#               servers:
-#                 - url: http://whoami:80

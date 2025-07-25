@@ -31,4 +31,4 @@ dependencies:
       app_name: "{{ whoami_app_name }}"
       app_with_traefik_proxy: "{{ whoami_with_traefik }}"
       app_traefik_hostname: "{{ whoami_traefik_hostname }}"
-      app_traefik_url: "http://localhost:{{ whoami_port }}"
+      app_traefik_url: "http://{{ whoami_app_name }}.{{ app_internal_domain }}:80"

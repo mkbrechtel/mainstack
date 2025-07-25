@@ -21,6 +21,20 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
   - Configurable port mapping and container settings
   - Support for multiple instances with different configurations
 
+### Changed
+- All roles now use a global "proxy" network for inter-container communication
+  - Traefik role: Changed default network from "host" to "proxy"
+  - App role: Added `app_network` configuration defaulting to "proxy"
+  - Whoami role: Changed default network from "podman" to "proxy"
+- Implemented templated internal domain naming convention
+  - Added `app_internal_domain` variable (defaults to "app.internal") in app and whoami roles
+  - Services now use `{{ app_name }}.{{ app_internal_domain }}` for internal communication
+  - Container hostnames follow the same naming pattern for DNS resolution
+
+### Removed
+- Removed `traefik_custom_routes` feature from Traefik role
+  - Use individual app roles with Traefik integration instead
+
 ### Documentation
 - Added "_with_" feature flag pattern documentation to CLAUDE.md
 - Documented the convention for optional functionality in roles
