@@ -1,11 +1,11 @@
 # Whoami
 
-This role deploys the traefik/whoami container service, which is useful for testing HTTP routing and load balancing configurations. It demonstrates how to use the service role for setting up a containerized service with Traefik integration.
+This role deploys the traefik/whoami container service, which is useful for testing HTTP routing and load balancing configurations. It demonstrates how to use the app role for setting up a containerized app with Traefik integration.
 
 ## Requirements
 
 - Podman installed on the target host
-- Service role (uses service role as a dependency)
+- App role (uses app role as a dependency)
 - Traefik deployed (when using Traefik integration)
 
 ## Role Variables
@@ -17,19 +17,19 @@ whoami_container_name: "whoami"
 whoami_port: 8080
 whoami_restart_policy: "unless-stopped"
 
-# Service configuration (passed to service role)
-whoami_service_name: "whoami"
+# App configuration (passed to app role)
+whoami_app_name: "whoami"
 whoami_with_traefik: false
-whoami_traefik_hostname: "{{ whoami_service_name }}"
+whoami_traefik_hostname: "{{ whoami_app_name }}"
 
-# The service role will automatically configure Traefik routing
-# using service_traefik_url which defaults to http://localhost:{{ whoami_port }}
+# The app role will automatically configure Traefik routing
+# using app_traefik_url which defaults to http://localhost:{{ whoami_port }}
 ```
 
 ## Dependencies
 
 This role depends on:
-- service
+- app
 
 ## Example Playbook
 
@@ -58,7 +58,7 @@ Multiple whoami instances:
       include_role:
         name: mkbrechtel.mainstack.whoami
       vars:
-        whoami_service_name: whoami1
+        whoami_app_name: whoami1
         whoami_container_name: whoami1
         whoami_port: 8081
         whoami_with_traefik: true
@@ -68,7 +68,7 @@ Multiple whoami instances:
       include_role:
         name: mkbrechtel.mainstack.whoami
       vars:
-        whoami_service_name: whoami2
+        whoami_app_name: whoami2
         whoami_container_name: whoami2
         whoami_port: 8082
         whoami_with_traefik: true

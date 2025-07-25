@@ -8,16 +8,16 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 ## [Unreleased]
 
 ### Added
-- Service role for managing service directories and Traefik integration
-  - Configurable service directory (defaults to `/srv/{{ service_name }}`)
-  - Optional Traefik proxy integration with `service_with_traefik_proxy` feature flag
-  - Separate `service_traefik_hostname` variable for Traefik routing (defaults to `service_name`)
-  - Explicit `service_traefik_url` variable for backend service URL configuration
-  - Customizable Traefik configuration through `service_traefik_config` variable
-  - Automatic Traefik configuration file generation at `/etc/traefik/conf.d/{{ service_name }}.yaml`
-- Whoami role as example implementation using the service role
+- App role for managing app directories and Traefik integration
+  - Configurable app directory (defaults to `/srv/apps/{{ app_name }}`)
+  - Optional Traefik proxy integration with `app_with_traefik_proxy` feature flag
+  - Separate `app_traefik_hostname` variable for Traefik routing (defaults to `app_name`)
+  - Explicit `app_traefik_url` variable for backend app URL configuration
+  - Customizable Traefik configuration through `app_traefik_config` variable
+  - Automatic Traefik configuration file generation at `/etc/traefik/conf.d/{{ app_name }}.yaml`
+- Whoami role as example implementation using the app role
   - Deploys traefik/whoami container for testing HTTP routing
-  - Demonstrates service role usage with Traefik integration
+  - Demonstrates app role usage with Traefik integration
   - Configurable port mapping and container settings
   - Support for multiple instances with different configurations
 

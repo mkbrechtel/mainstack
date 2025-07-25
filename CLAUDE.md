@@ -15,7 +15,7 @@ Files can be placed in `./files/` at the collection root instead of in individua
 This collection uses a "_with_" naming convention for optional feature flags in roles. These boolean variables enable or disable specific functionality within a role:
 
 - Feature flags follow the pattern: `<role_name>_with_<feature>`
-- Examples: `service_with_traefik_proxy`, `traefik_with_dashboard`, `traefik_with_https_redirect`
+- Examples: `app_with_traefik_proxy`, `traefik_with_dashboard`, `traefik_with_https_redirect`
 - This pattern allows roles to have a core functionality with optional extensions
 - Feature flags should default to `false` to maintain backward compatibility
 

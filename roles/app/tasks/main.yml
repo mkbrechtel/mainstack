@@ -1,0 +1,28 @@
+---
+- name: Validate app_name is defined
+  ansible.builtin.assert:
+    that:
+      - app_name is defined
+      - app_name | length > 0
+    fail_msg: "app_name must be defined and not empty"
+
+- name: Create app directory
+  ansible.builtin.file:
+    path: "{{ app_dir }}"
+    state: directory
+    mode: '0755'
+
+- name: Configure Traefik for app
+  when: app_with_traefik_proxy | bool
+  block:
+    - name: Ensure Traefik conf.d directory exists
+      ansible.builtin.file:
+        path: /etc/traefik/conf.d
+        state: directory
+        mode: '0755'
+
+    - name: Deploy Traefik configuration for app
+      ansible.builtin.template:
+        src: traefik-app.yaml.j2
+        dest: "/etc/traefik/conf.d/{{ app_name }}.yaml"
+        mode: '0644'

@@ -1,7 +1,7 @@
 ---
 galaxy_info:
   author: mainstack
-  description: Configure service directories and optional Traefik integration
+  description: Configure app directories and optional Traefik integration
   license: MIT
   min_ansible_version: "2.9"
   platforms:
@@ -18,7 +18,7 @@ galaxy_info:
         - focal
         - jammy
   galaxy_tags:
-    - service
+    - app
     - traefik
     - configuration
 

@@ -26,9 +26,9 @@ galaxy_info:
     - containers
 
 dependencies:
-  - role: service
+  - role: app
     vars:
-      service_name: "{{ whoami_service_name }}"
-      service_with_traefik_proxy: "{{ whoami_with_traefik }}"
-      service_traefik_hostname: "{{ whoami_traefik_hostname }}"
-      service_traefik_url: "http://localhost:{{ whoami_port }}"
+      app_name: "{{ whoami_app_name }}"
+      app_with_traefik_proxy: "{{ whoami_with_traefik }}"
+      app_traefik_hostname: "{{ whoami_traefik_hostname }}"
+      app_traefik_url: "http://localhost:{{ whoami_port }}"

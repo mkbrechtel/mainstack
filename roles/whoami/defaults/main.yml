@@ -6,10 +6,10 @@ whoami_port: 8080
 whoami_restart_policy: "unless-stopped"
 whoami_log_max_size: "5m"
 
-# Service configuration (passed to service role)
-whoami_service_name: "whoami"
+# App configuration (passed to app role)
+whoami_app_name: "whoami"
 whoami_with_traefik: false
-whoami_traefik_hostname: "{{ whoami_service_name }}"
+whoami_traefik_hostname: "{{ whoami_app_name }}"
 
 # Network configuration
 whoami_network: "podman"

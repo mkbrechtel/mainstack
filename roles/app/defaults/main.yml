@@ -1,0 +1,33 @@
+---
+# App name (required)
+app_name: ""
+
+# App directory
+app_dir: "/srv/apps/{{ app_name }}"
+
+# Feature flags
+app_with_traefik_proxy: false
+
+# Traefik hostname (used in Traefik rule)
+app_traefik_hostname: "{{ app_name }}"
+
+# Traefik app URL (backend URL for the app)
+app_traefik_url: "http://{{ app_name }}:80"
+
+# Traefik configuration
+# This default configuration provides a basic HTTP app setup
+# Override this variable to customize the Traefik configuration for your app
+app_traefik_config: |
+  http:
+    routers:
+      {{ app_name }}:
+        entrypoints: websecure
+        rule: Host(`{{ app_traefik_hostname }}`)
+        service: {{ app_name }}
+        tls:
+          certresolver: letsencrypt
+    services:
+      {{ app_name }}:
+        loadBalancer:
+          servers:
+            - url: {{ app_traefik_url }}
