@@ -8,6 +8,9 @@ service_dir: "/srv/{{ service_name }}"
 # Feature flags
 service_with_traefik_proxy: false
 
+# Traefik hostname (used in Traefik rule)
+service_traefik_hostname: "{{ service_name }}"
+
 # Traefik configuration
 # This default configuration provides a basic HTTP service setup
 # Override this variable to customize the Traefik configuration for your service
@@ -16,7 +19,7 @@ service_traefik_config: |
     routers:
       {{ service_name }}:
         entrypoints: websecure
-        rule: Host(`{{ service_name }}.{{ domain_name }}`)
+        rule: Host(`{{ service_traefik_hostname }}`)
         service: {{ service_name }}
         tls:
           certresolver: letsencrypt

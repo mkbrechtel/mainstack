@@ -11,6 +11,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - Service role for managing service directories and Traefik integration
   - Configurable service directory (defaults to `/srv/{{ service_name }}`)
   - Optional Traefik proxy integration with `service_with_traefik_proxy` feature flag
+  - Separate `service_traefik_hostname` variable for Traefik routing (defaults to `service_name`)
   - Customizable Traefik configuration through `service_traefik_config` variable
   - Automatic Traefik configuration file generation at `/etc/traefik/conf.d/{{ service_name }}.yaml`
 
