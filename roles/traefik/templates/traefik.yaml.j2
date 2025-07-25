@@ -1,0 +1,41 @@
+{% if traefik_with_dashboard %}
+api:
+  dashboard: true
+  insecure: {{ traefik_dashboard_insecure | bool | lower }}
+{% endif %}
+
+certificatesResolvers:
+{% for resolver_name, resolver_config in traefik_cert_resolvers.items() %}
+  {{ resolver_name }}:
+    acme:
+      caServer: {{ resolver_config.ca_server }}
+      email: {{ resolver_config.email }}
+      storage: /ssl-certs/acme-{{ resolver_name }}.json
+      tlsChallenge: {{ resolver_config.tls_challenge | default(true) | bool | lower }}
+{% endfor %}
+
+entryPoints:
+{% if traefik_with_http_entrypoint %}
+  web:
+    address: :{{ traefik_http_port }}
+{% if traefik_with_https_redirect %}
+    http:
+      redirections:
+        entryPoint:
+          to: websecure
+          scheme: https
+{% endif %}
+{% endif %}
+  websecure:
+    address: :{{ traefik_https_port }}
+    http:
+      tls:
+        certResolver: {{ traefik_default_cert_resolver }}
+
+log:
+  level: {{ traefik_log_level }}
+
+providers:
+  file:
+    directory: /etc/traefik/conf.d
+    watch: true

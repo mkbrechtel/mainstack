@@ -5,7 +5,19 @@ All notable changes to this project will be documented in this file.
 The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/),
 and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
-## [0.0.0-dev] - 2025-01-25
+## [Unreleased]
+
+### Added
+- Traefik role for deploying Traefik v3.5 reverse proxy with Podman
+  - Configurable network mode (defaults to host networking)
+  - Feature flags for HTTP entrypoint, HTTPS redirect, and dashboard
+  - Support for custom route configurations
+  - Let's Encrypt integration with production and staging resolvers
+  - Global variable `domain_name` support for service naming
+  - Dashboard route configuration at `traefik.{{ domain_name }}`
+- Local playbook (`local.yaml`) for deploying to localhost with automatic domain detection
+
+## [0.0.0-dev] - 2025-07-25
 
 ### Added
 - Initial development release of mkbrechtel.mainstack Ansible collection

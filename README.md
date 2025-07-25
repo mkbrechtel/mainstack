@@ -13,6 +13,12 @@ ansible-galaxy collection install mkbrechtel.mainstack
 - Ansible >= 2.14.3
 - Podman (for container management)
 
+## Global Variables
+
+This collection uses global variables that are shared across all roles:
+
+- `domain_name`: The primary domain name used throughout the collection. Roles use this to construct service-specific subdomains (e.g., `dashboard.{{ domain_name }}` for Traefik dashboard)
+
 ## Usage
 
 [To be filled with examples as roles are developed]

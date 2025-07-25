@@ -1,0 +1,10 @@
+---
+- name: restart traefik
+  ansible.builtin.debug:
+    msg: "Traefik container would be restarted (skipped in check mode)"
+  when: ansible_check_mode | default(false)
+
+- name: restart traefik
+  ansible.builtin.command:
+    cmd: podman restart {{ traefik_container_name }}
+  when: not (ansible_check_mode | default(false))

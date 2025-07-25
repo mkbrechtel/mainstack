@@ -1,5 +1,11 @@
 ## Ansible Project Structure
 
+### Global Variables
+
+This collection uses global variables that are shared across all roles:
+
+- `domain_name`: The primary domain name used throughout the collection. This variable is used by roles to construct service-specific subdomains (e.g., `dashboard.{{ domain_name }}` for Traefik dashboard).
+
 ### File Organization
 
 Files can be placed in `./files/` at the collection root instead of in individual role directories. Ansible's search path includes the collection's files directory, so roles can reference these files directly without duplication.

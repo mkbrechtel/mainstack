@@ -1,0 +1,27 @@
+---
+galaxy_info:
+  author: mainstack
+  description: Deploy and configure Traefik reverse proxy with Podman
+  license: MIT
+  min_ansible_version: "2.9"
+  platforms:
+    - name: EL
+      versions:
+        - "8"
+        - "9"
+    - name: Debian
+      versions:
+        - bullseye
+        - bookworm
+    - name: Ubuntu
+      versions:
+        - focal
+        - jammy
+  galaxy_tags:
+    - traefik
+    - reverse-proxy
+    - load-balancer
+    - podman
+    - containers
+
+dependencies: []

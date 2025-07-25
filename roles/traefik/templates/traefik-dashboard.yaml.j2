@@ -1,0 +1,8 @@
+http:
+  routers:
+    traefik:
+      entrypoints: websecure
+      rule: Host(`{{ traefik_dashboard_service_name }}`)
+      service: api@internal
+      tls:
+        certresolver: {{ traefik_default_cert_resolver }}
