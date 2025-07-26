@@ -7,6 +7,8 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+## [0.0.3] - 2025-07-26
+
 ### Changed
 - Enhanced `deploy_simple_containerfile_app.yaml` playbook
   - Now uses current working directory (PWD) by default instead of playbook directory
@@ -109,6 +111,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - containers.podman: >=1.10.0
 - ansible.posix: >=1.5.0
 
+[0.0.3]: https://github.com/mkbrechtel/mainstack/compare/v0.0.2...v0.0.3
 [0.0.2]: https://github.com/mkbrechtel/mainstack/compare/v0.0.1...v0.0.2
 [0.0.1]: https://github.com/mkbrechtel/mainstack/compare/v0.0.0-dev...v0.0.1
 [0.0.0-dev]: https://github.com/mkbrechtel/mainstack/releases/tag/v0.0.0-dev
