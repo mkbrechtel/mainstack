@@ -1,0 +1,13 @@
+http:
+  routers:
+    {{ containerfile_app_name }}:
+      entrypoints: {{ containerfile_app_traefik_entrypoint }}
+      rule: Host(`{{ containerfile_app_name }}.{{ domain_name }}`)
+      service: {{ containerfile_app_name }}
+      tls:
+        certresolver: {{ containerfile_app_traefik_certresolver }}
+  services:
+    {{ containerfile_app_name }}:
+      loadBalancer:
+        servers:
+          - url: http://{{ containerfile_app_container_name }}:{{ containerfile_app_detected_port }}

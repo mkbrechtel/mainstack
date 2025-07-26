@@ -1,0 +1,20 @@
+---
+# Core configuration
+containerfile_app_directory: "{{ app_dir | default('') }}"
+containerfile_app_name: "{{ containerfile_app_directory | basename if containerfile_app_directory else '' }}"
+containerfile_app_default_port: 80
+
+# Container configuration
+containerfile_app_image_name: "{{ containerfile_app_name }}-local"
+containerfile_app_container_name: "{{ containerfile_app_name }}.{{ app_internal_domain }}"
+containerfile_app_force_rebuild: true
+containerfile_app_network: proxy
+
+# Traefik integration
+containerfile_app_with_traefik: true
+containerfile_app_traefik_config_dir: /etc/traefik/conf.d
+containerfile_app_traefik_entrypoint: websecure
+containerfile_app_traefik_certresolver: letsencrypt
+
+# Internal domain configuration
+app_internal_domain: "{{ domain_name }}.app.internal"

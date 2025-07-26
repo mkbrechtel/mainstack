@@ -1,0 +1,93 @@
+---
+- name: Validate required variables
+  ansible.builtin.assert:
+    that:
+      - containerfile_app_directory is defined
+      - containerfile_app_directory | length > 0
+    fail_msg: "containerfile_app_directory must be defined and not empty"
+
+- name: Set app name from directory
+  ansible.builtin.set_fact:
+    containerfile_app_name: "{{ containerfile_app_name | default(containerfile_app_directory | basename) }}"
+
+- name: Check if directory exists
+  ansible.builtin.stat:
+    path: "{{ containerfile_app_directory }}"
+  register: dir_check
+
+- name: Fail if directory doesn't exist
+  ansible.builtin.fail:
+    msg: "Directory {{ containerfile_app_directory }} does not exist"
+  when: not dir_check.stat.exists or not dir_check.stat.isdir
+
+- name: Check if Containerfile exists
+  ansible.builtin.stat:
+    path: "{{ containerfile_app_directory }}/Containerfile"
+  register: containerfile_check
+
+- name: Fail if Containerfile doesn't exist
+  ansible.builtin.fail:
+    msg: "Containerfile not found in {{ containerfile_app_directory }}"
+  when: not containerfile_check.stat.exists
+
+- name: Read Containerfile to extract port
+  ansible.builtin.slurp:
+    src: "{{ containerfile_app_directory }}/Containerfile"
+  register: containerfile_content
+
+- name: Extract port from Containerfile
+  ansible.builtin.set_fact:
+    containerfile_app_detected_port: "{{ containerfile_content.content | b64decode | regex_search('(?i)^\\s*EXPOSE\\s+(\\d+)', '\\1', multiline=True) | first | default(containerfile_app_default_port) }}"
+
+- name: Show app configuration
+  ansible.builtin.debug:
+    msg:
+      - "App name: {{ containerfile_app_name }}"
+      - "App directory: {{ containerfile_app_directory }}"
+      - "Container port: {{ containerfile_app_detected_port }}"
+      - "Domain: {{ containerfile_app_name }}.{{ domain_name }}"
+
+- name: Build container image
+  containers.podman.podman_image:
+    name: "{{ containerfile_app_image_name }}"
+    path: "{{ containerfile_app_directory }}"
+    build:
+      file: "{{ containerfile_app_directory }}/Containerfile"
+    force: "{{ containerfile_app_force_rebuild }}"
+    state: present
+
+- name: Stop existing container if running
+  containers.podman.podman_container:
+    name: "{{ containerfile_app_container_name }}"
+    state: stopped
+  ignore_errors: true
+
+- name: Remove existing container
+  containers.podman.podman_container:
+    name: "{{ containerfile_app_container_name }}"
+    state: absent
+  ignore_errors: true
+
+- name: Deploy application container
+  containers.podman.podman_container:
+    name: "{{ containerfile_app_container_name }}"
+    image: "{{ containerfile_app_image_name }}"
+    state: started
+    recreate: true
+    network: "{{ containerfile_app_network }}"
+    hostname: "{{ containerfile_app_container_name }}"
+
+- name: Configure Traefik integration
+  when: containerfile_app_with_traefik | bool
+  block:
+    - name: Ensure Traefik conf.d directory exists
+      ansible.builtin.file:
+        path: "{{ containerfile_app_traefik_config_dir }}"
+        state: directory
+        mode: '0755'
+
+    - name: Deploy Traefik configuration for app
+      ansible.builtin.template:
+        src: traefik-containerfile-app.yaml.j2
+        dest: "{{ containerfile_app_traefik_config_dir }}/{{ containerfile_app_name }}.yaml"
+        mode: '0644'

@@ -8,15 +8,18 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 ## [Unreleased]
 
 ### Added
-- `deploy_simple_containerfile_app.yaml` playbook for deploying local containerized applications
+- Containerfile App role for deploying local containerized applications
   - Automatically builds container images from local Containerfiles
-  - Uses directory name as application name
+  - Uses directory name as application name by default
   - Automatically detects exposed port from Containerfile EXPOSE directive (defaults to 80)
   - Integrates with Traefik proxy using file-based configuration
   - Creates Traefik routing configuration at `/etc/traefik/conf.d/{{ app_name }}.yaml`
+  - Configurable through role variables for maximum flexibility
+  - Supports force rebuild, custom naming, and network configuration
+- `deploy_simple_containerfile_app.yaml` playbook as a convenient wrapper for the containerfile_app role
   - Uses `ansible_fqdn` for domain name configuration
-  - Supports custom port override via `container_port` variable
-- Example application in `examples/myapp/` demonstrating the playbook usage
+  - Simplifies deployment with minimal configuration required
+- Example application in `examples/myapp/` demonstrating containerfile_app usage
   - Nginx-based container exposing port 8080
   - Custom nginx configuration and static HTML content
   - README with usage instructions
