@@ -4,7 +4,8 @@
   connection: local
   vars:
     domain_name: "{{ ansible_fqdn }}"
+    app_dir: "{{ lookup('env', 'PWD') }}"
   roles:
     - role: containerfile_app
       vars:
-        containerfile_app_directory: "{{ app_dir | mandatory }}"
+        containerfile_app_directory: "{{ app_dir }}"

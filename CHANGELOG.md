@@ -7,6 +7,14 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+### Changed
+- Enhanced `deploy_simple_containerfile_app.yaml` playbook
+  - Now uses current working directory (PWD) by default instead of playbook directory
+  - Simplified to only pass directory to role - all naming logic handled internally
+- Improved containerfile_app role naming convention
+  - Container names now follow pattern: `{{ app_name }}.{{ domain_name }}.app.internal`
+  - Provides cleaner, more consistent container naming
+
 ### Added
 - Containerfile App role for deploying local containerized applications
   - Automatically builds container images from local Containerfiles

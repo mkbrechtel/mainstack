@@ -6,7 +6,7 @@ containerfile_app_default_port: 80
 
 # Container configuration
 containerfile_app_image_name: "{{ containerfile_app_name }}-local"
-containerfile_app_container_name: "{{ containerfile_app_name }}.{{ app_internal_domain }}"
+containerfile_app_container_name: "{{ containerfile_app_name }}.{{ domain_name }}.app.internal"
 containerfile_app_force_rebuild: true
 containerfile_app_network: proxy
 
