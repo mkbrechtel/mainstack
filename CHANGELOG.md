@@ -15,6 +15,12 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
   - Container names now follow pattern: `{{ app_name }}.{{ domain_name }}.app.internal`
   - Provides cleaner, more consistent container naming
 
+### Documentation
+- Extracted release process documentation from CODING.md to dedicated RELEASE.md
+- Enhanced release process with semantic versioning guidance
+- Added commands for reviewing changes since last release
+- Linked RELEASE.md from CLAUDE.md for better discoverability
+
 ### Added
 - Containerfile App role for deploying local containerized applications
   - Automatically builds container images from local Containerfiles

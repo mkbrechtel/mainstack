@@ -2,6 +2,9 @@
 
 **mainstack** provides base components for containerized web applications. We aim to support multiple containerization frameworks, starting with Podman.
 
+> **⚠️ Development Phase Notice**  
+> This collection is currently in development (version 0.x.x). Breaking changes may occur in any release until we reach version 1.0.0. APIs, role interfaces, and variable names are subject to change.
+
 ## Installation
 
 ```bash
