@@ -1,0 +1,13 @@
+http:
+  routers:
+    {{ app_name }}:
+      entrypoints: websecure
+      rule: Host(`{{ app_name }}.{{ domain_name }}`)
+      service: {{ app_name }}
+      tls:
+        certresolver: letsencrypt
+  services:
+    {{ app_name }}:
+      loadBalancer:
+        servers:
+          - url: http://{{ app_name }}.{{ app_internal_domain }}:{{ detected_port }}
